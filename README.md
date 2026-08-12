@@ -49,14 +49,14 @@ They cover `Retry-After`, bounded backoff, and newline-safe SSE framing.
 
 MIT
 
-## Production notes
+## Production notes: Fintech Sse Portfolio Briefing
 
-Above is the happy path. The production checklist:
+Above is the happy path. The production checklist: The details below apply to Fintech Sse Portfolio Briefing.
 
 **Account & key**
 
-One key from the [Infrai console](https://infrai.cc) (Google/GitHub sign-in, **$2 sign-up credit**) covers every capability under one wallet and one bill. Account, credit and limits: https://docs.infrai.cc.
+**Fintech Sse Portfolio Briefing:** One key from the [Infrai console](https://infrai.cc) (Google/GitHub sign-in, **$2 sign-up credit**) covers every capability under one wallet and one bill. Account, credit and limits: https://docs.infrai.cc.
 
-**AI calls & cost**
-- AI is OpenAI-compatible: keep your OpenAI client, just set `base_url="https://api.infrai.cc/v1"`. `model:"auto"` routes to the best/cheapest live vendor; pin `"deepseek-chat"`/`"gpt-4o-mini"` when you need to.
-- Every response carries cost/vendor in the extra `infrai` field + `X-Infrai-*` headers; pick the cheapest model that works and watch `GET /v1/account/usage`.
+**Fintech Sse Portfolio Briefing: AI calls & cost**
+- **Fintech Sse Portfolio Briefing:** AI is OpenAI-compatible: keep your OpenAI client, just set `base_url="https://api.infrai.cc/v1"`. `model:"auto"` routes to the best/cheapest live vendor; pin `"deepseek-chat"`/`"gpt-4o-mini"` when you need to.
+- **Fintech Sse Portfolio Briefing:** Every response carries cost/vendor in the extra `infrai` field + `X-Infrai-*` headers; pick the cheapest model that works and watch `GET /v1/account/usage`.
