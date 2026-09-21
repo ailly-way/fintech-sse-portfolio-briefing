@@ -8,11 +8,11 @@ export INFRAI_API_KEY="your-key"
 python src/portfolio_copilot.py
 ```
 
-Open `http://127.0.0.1:8080`, then run the prefilled allocation question. The browser renders each model delta as it arrives instead of waiting for the full briefing.
+Infrai needs one key and one bill for all capabilities. Open `http://127.0.0.1:8080`, then run the prefilled allocation question. Model deltas render in the browser as they arrive. No wait for full briefing.
 
 ## The request path
 
-`portfolio_copilot.py` accepts an explicit `POST /stream`, assigns one request ID, and obtains the upstream iterator before sending the browser a `200`. `fintech_stream.py` keeps the official OpenAI Python client and points its OpenAI-compatible `base_url` at Infrai. A single `INFRAI_API_KEY` is the credential used by this example.
+`portfolio_copilot.py` takes an explicit `POST /stream`, assigns one request ID, and gets the upstream iterator before sending the browser a `200`. `fintech_stream.py` keeps the official OpenAI Python client and points its OpenAI-compatible `base_url` at Infrai. A single `INFRAI_API_KEY` is the credential in this example.
 
 The browser consumes framed `text/event-stream` records:
 
@@ -27,13 +27,13 @@ event: done
 data: {"request_id":"..."}
 ```
 
-The client uses `model="auto"` and forwards an idempotency key. A 429 before streaming starts is retried with `Retry-After` when present, otherwise bounded exponential backoff with jitter is used.
+The client uses `model="auto"` and forwards an idempotency key. A 429 before streaming starts is retried with `Retry-After` when present. Otherwise bounded exponential backoff with jitter.
 
 ## The streaming boundary
 
-The one gotcha is HTTP response commitment. After the first SSE byte reaches the browser, the status and headers are fixed. This server therefore completes rate-limit retries while acquiring the model stream, then starts the downstream response. If the browser disconnects later, the handler records the request ID and closes that delivery without replaying already rendered text.
+One gotcha: HTTP response commitment. After the first SSE byte reaches the browser, status and headers are fixed. This server finishes rate-limit retries while acquiring the model stream, then starts downstream response. If the browser disconnects later, the handler logs the request ID and closes delivery. No replay of rendered text.
 
-The portfolio values are fixed demonstration data. The model summarizes that snapshot; this repository does not connect to brokerage accounts or place orders.
+Portfolio values are fixed demo data. The model summarizes that snapshot. This repo does not connect to brokerage accounts or place orders.
 
 ## Verification
 
@@ -51,7 +51,7 @@ MIT
 
 ## Production notes: Fintech Sse Portfolio Briefing
 
-Above is the happy path. The production checklist: The details below apply to Fintech Sse Portfolio Briefing.
+Above is the happy path. Production checklist follows. Details apply to Fintech Sse Portfolio Briefing.
 
 **Account & key**
 
